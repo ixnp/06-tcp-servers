@@ -1,0 +1,24 @@
+{
+  "name": "06-tcp-servers",
+  "version": "1.0.0",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 06: TCP Chat Server\r ======",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ixnp/06-tcp-servers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ixnp/06-tcp-servers/issues"
+  },
+  "homepage": "https://github.com/ixnp/06-tcp-servers#readme",
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
