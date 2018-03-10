@@ -16,20 +16,22 @@ ee.on('@nickname', (client, string)=>{
     client.socket.write(`nickname updated to ${nickname}`);
 });
 // ctrl ] quit//
-//ee.on('@quit') should disconnect//
-ee.on('@list', (client) => {
+ee.on('@quit', function(client) {
+    pool.splice(pool.indexOf(client), 1);
+    console.log(client.nickname + 'left the chat')
+});
 
-        console.log('Active Users:')
-    pool.forEach(function(client){
-        console.log(client.nickname); 
+ee.on('@list', (client) => {
+    console.log('Active Users:')
+    pool.forEach(function (client) {
+        console.log(client.nickname);
     })
-  
- 
-    
-    // let userName = client.nickname;
- 
-});//list all connected users//
-//ee.on('@dm')should dm specific user//
+});
+
+ee.on('@dm', (client, string) =>{
+    let otherUser = string.split(' ').shift().trim();
+    otherUser.socket.write(`Hi`);
+})
 
 server.on('connection', function(socket){
     var client = new Client(socket);
