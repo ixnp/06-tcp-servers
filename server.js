@@ -15,6 +15,21 @@ ee.on('@nickname', (client, string)=>{
     client.nickname = nickname;
     client.socket.write(`nickname updated to ${nickname}`);
 });
+// ctrl ] quit//
+//ee.on('@quit') should disconnect//
+ee.on('@list', (client) => {
+
+        console.log('Active Users:')
+    pool.forEach(function(client){
+        console.log(client.nickname); 
+    })
+  
+ 
+    
+    // let userName = client.nickname;
+ 
+});//list all connected users//
+//ee.on('@dm')should dm specific user//
 
 server.on('connection', function(socket){
     var client = new Client(socket);
@@ -25,7 +40,6 @@ server.on('connection', function(socket){
         const string = data.toString().split(' ').splice(1).join(' ');
         if(command.startsWith('@')){
             ee.emit(command, client, string);
-           console.log('event data', client.nickname);
             return;
         }
         ee.emit('defualt');
