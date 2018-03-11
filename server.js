@@ -46,8 +46,15 @@ server.on('connection', function(socket){
         }
         ee.emit('defualt');
         console.log(client.nickname + ':' + command);
+        liveChat(client,command);
     });
 });
+
+function liveChat(client,command){
+    pool.forEach(function(client, index, pool){
+        client.socket.write(client.nickname + ':' + command);
+    })
+}
 
 
 server.listen(PORT,()=>{
