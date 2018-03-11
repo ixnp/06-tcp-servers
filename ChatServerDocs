@@ -1,0 +1,13 @@
+
+Instructions to Start and run simple telnet chat server:
+Note: Window 10 users open power shell and enter wsl 
+
+
+Start Server: Node server.js
+
+Join Server: Telnet <your ip> <port>
+
+To leave chat: @quit 
+Change nickname: @nickname <new nickname 
+View users online: @list
+Direct Message a user: @dm <user nickname> <message>
