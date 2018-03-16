@@ -10,4 +10,4 @@ Join Server: Telnet <your ip> <port>
 To leave chat: @quit 
 Change nickname: @nickname <new nickname 
 View users online: @list
-Direct Message a user: @dm <user nickname> <message>
+Direct Message a user: @dm @<user nickname> <message>

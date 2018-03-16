@@ -11,26 +11,52 @@ const server = net.createServer();
 const pool = [];
 
 ee.on('@nickname', (client, string)=>{
+    let oldname = client.nickname
     let nickname = string.split(' ').shift().trim();
     client.nickname = nickname;
     client.socket.write(`nickname updated to ${nickname}`);
+    liveChat(client,`${oldname}nickname updated to ${nickname}`);
 });
-// ctrl ] quit//
+
 ee.on('@quit', function(client) {
     pool.splice(pool.indexOf(client), 1);
     console.log(client.nickname + 'left the chat')
+    liveChat(client, + `${nickname} left the chat`);
 });
 
 ee.on('@list', (client) => {
     console.log('Active Users:')
     pool.forEach(function (client) {
         console.log(client.nickname);
+        client.socket.write(client.nickname);
     })
 });
 
-ee.on('@dm', (client, string) =>{
-    let otherUser = string.split(' ').shift().trim();
-    otherUser.socket.write(`Hi`);
+ee.on('@dm', function(client, string) {
+    let userNames = [];
+    let splitString = string.split(' ');
+
+    let message = splitString.reduce((count, word, ind) => {
+
+        if(word[0] != '@') {
+            count += word;
+            if(ind < splitString.length - 1) count += " ";
+        }
+        else(userNames.push(word));
+        return count;
+    }, "");
+
+ 
+    userNames.forEach(name => {
+        pool.forEach(cl => {
+            if(`@${cl.nickname }`=== name) {
+                cl.socket.write(message);
+               
+            }
+        })
+    })
+
+ 
 })
 
 server.on('connection', function(socket){
@@ -52,7 +78,7 @@ server.on('connection', function(socket){
 
 function liveChat(client,command){
     pool.forEach(function(client, index, pool){
-        client.socket.write(client.nickname + ':' + command);
+        client.socket.write(`\n${client.nickname}: ${command}`);
     })
 }
 
